@@ -5,16 +5,16 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-
+//реализация баскета
         Basket basket = new Basket();
 
         basket.saveTxt(new File("basket.txt"));
-        //для бинарного формата
-        basket.saveBin(new File("basket.txt"));
+        //реализация для бинарного формата
+        //basket.saveBin(new File("basket.bin"));
 
-        Basket basket1 = Basket.loadFromTxtFile(new File("basket.txt"));
+        Basket basket2 = Basket.loadFromTxtFile(new File("basket.txt"));
 
-
+// задача из одномерных массивов:
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Список возможных товаров для покупки");

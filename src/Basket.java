@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-//public class Basket implements Serializable {
+//public class Basket implements Serializable { // для бина задача 2
 public class Basket {
 
     protected String[] names;
@@ -10,10 +10,16 @@ public class Basket {
 
 
     //конструктор, принимающий массив цен и названий продуктов;
-    public Basket() {
+    public Basket(String[] names, int[] prices) {
         this.names = names;
         this.prices = prices;
         this.amounts = new int[names.length];
+
+
+    }
+
+    //конструтор по умолчанию для сериализации, для Bin должен быть private
+    public Basket() {
 
     }
 
@@ -28,7 +34,7 @@ public class Basket {
     }
 
     //метод сохранения корзины в текстовый файл; использовать встроенные сериализаторы нельзя;
-    public void saveTxt(File textFile) throws IOException {
+    public void saveTxt(File textFile) throws IOException { //исключение для проверки возможности доступа к месту для записи
         try (PrintWriter writer = new PrintWriter(textFile);) {
             writer.println(names.length); // определить размер необходимый для массива
             for (int i = 0; i < names.length; i++) {
@@ -46,7 +52,8 @@ public class Basket {
         int[] prices = null;
         int[] amounts = null;
 
-        try (Scanner scanner = new Scanner(new FileInputStream(textFile));) {
+        try (Scanner scanner = new Scanner(new FileInputStream(textFile));) { /*считать данные из файла
+        куда записано ранее*/
             int size = Integer.parseInt(scanner.nextLine());// считать размер места для массив
             names = new String[size];
             prices = new int[size];
@@ -72,19 +79,22 @@ public class Basket {
 
 
     }
-// задача 2
-
+// задача 2 Бинарный формат
+/*
     public void saveBin(File textFile) throws IOException {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(textFile));) {
             out.writeObject(this);
 
         }
     }
-        public static Basket loadFromBin (File textFile) throws IOException, ClassNotFoundException {
-            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(textFile));) {
-                return (Basket) in.readObject();
+
+    public static Basket loadFromBin(File textFile) throws IOException, ClassNotFoundException { // если будет объект класса которого нет в проекте
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(textFile));) {
+            return (Basket) in.readObject();
 
 
         }
     }
+
+ */
 }
